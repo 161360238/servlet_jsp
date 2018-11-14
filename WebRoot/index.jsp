@@ -48,11 +48,34 @@
     <span class="systemlogo"></span> 
        
     <div class="loginbox loginbox1">
+    <%
+    	Object obj=request.getAttribute("flag");
+    	if(obj!=null){
+    %>
+	    <div style="text-align: center;">
+	    	<p style="font-size: 15px;color:darkred;font-weight: bold;">用户名或密码错误</p>
+	    </div>
+    	
+    <%}  %>
     
-    <form action="" method="post">
+     <%
+    	Object pwd=session.getAttribute("pwd");
+    	if(pwd!=null){
+    %>
+	    <div style="text-align: center;">
+	    	<p style="font-size: 15px;color:darkred;font-weight: bold;">密码修改成功</p>
+	    </div>
+    	
+    <%} 
+    	session.removeAttribute("pwd");	
+    %>
+    
+    <form action="UserServlet" method="post">
 	    <ul>
-	    <li><input name="" type="text" placeholder="用户名" class="loginuser"  /></li>
-	    <li><input name="" type="text" placeholder="密码" class="loginpwd" value="密码" /></li>
+	    	
+	    <li><input name="uname" type="text" placeholder="用户名" class="loginuser"  /></li>
+	    <input name="oper" type="hidden" value="login" />
+	    <li><input name="pwd" type="text" placeholder="密码" class="loginpwd" /></li>
 	    <li class="yzm">
 	    <span><input name="" type="text" value="验证码" onclick="JavaScript:this.value=''"/></span><cite>X3D5S</cite> 
 	    </li>
