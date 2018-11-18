@@ -10,4 +10,6 @@ public interface UserService {
 	int userChangePwdService(String newPwd, int uid);
 
 	List<User> showAllUserServer();
+
+	int userRegService(User u);
 }

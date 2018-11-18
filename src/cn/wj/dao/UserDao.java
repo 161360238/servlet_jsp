@@ -13,4 +13,7 @@ public interface UserDao {
 	int userChangePwdDao(String newPwd, int uid);
 
 	List<User> showAllUserDao();
+
+	int userRegDao(User u);
+
 }

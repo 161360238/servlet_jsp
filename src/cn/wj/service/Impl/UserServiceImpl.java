@@ -28,4 +28,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.showAllUserDao();
 	}
 
+	@Override
+	public int userRegService(User u) {
+		int index=userDao.userRegDao(u);
+		return index;
+	}
+
 }

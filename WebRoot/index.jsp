@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,9 +10,9 @@
 	pageContext.setAttribute("APP_PATH",request.getContextPath());
 %>
 <title>欢迎登录后台管理系统</title>
-<link href="${APP_PATH }/static/css/style.css" rel="stylesheet" type="text/css" />
-<script language="JavaScript" src="${APP_PATH }/static/js/jquery.js"></script>
-<script src="${APP_PATH }/static/js/cloud.js" type="text/javascript"></script>
+<link href="${APP_PATH }/css/style.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" src="${APP_PATH }/js/jquery.js"></script>
+<script src="${APP_PATH }/js/cloud.js" type="text/javascript"></script>
 
 <script language="javascript">
 	$(function(){
@@ -48,27 +49,25 @@
     <span class="systemlogo"></span> 
        
     <div class="loginbox loginbox1">
-    <%
-    	Object obj=request.getAttribute("flag");
-    	if(obj!=null){
-    %>
-	    <div style="text-align: center;">
-	    	<p style="font-size: 15px;color:darkred;font-weight: bold;">用户名或密码错误</p>
-	    </div>
-    	
-    <%}  %>
-    
-     <%
-    	Object pwd=session.getAttribute("pwd");
-    	if(pwd!=null){
-    %>
-	    <div style="text-align: center;">
-	    	<p style="font-size: 15px;color:darkred;font-weight: bold;">密码修改成功</p>
-	    </div>
-    	
-    <%} 
-    	session.removeAttribute("pwd");	
-    %>
+	
+    <c:choose>
+    	<c:when test="${flag==0 }">
+    		<div style="text-align: center;">
+	    		<p style="font-size: 15px;color:darkred;font-weight: bold;">用户名或密码错误</p>
+	   		</div>
+    	</c:when>
+    	<c:when test="${flag==1 }">
+    		<div style="text-align: center;">
+	    		<p style="font-size: 15px;color:darkred;font-weight: bold;">密码修改成功</p>
+	   		</div>
+    	</c:when>
+    	<c:when test="${flag==2 }">
+    		<div style="text-align: center;">
+	    		<p style="font-size: 15px;color:darkred;font-weight: bold;">注册成功</p>
+	   		</div>
+    	</c:when>
+    </c:choose>
+    <c:remove var="flag" scope="session"/>
     
     <form action="UserServlet" method="post">
 	    <ul>
@@ -79,7 +78,7 @@
 	    <li class="yzm">
 	    <span><input name="" type="text" value="验证码" onclick="JavaScript:this.value=''"/></span><cite>X3D5S</cite> 
 	    </li>
-	    <li><input name="" type="submit" class="loginbtn" value="登录"  onclick="javascript:window.location='main.html'"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
+	    <li><input name="" type="submit" class="loginbtn" value="登录"  onclick="javascript:window.location='main.html'"  /><label><a href="user/reg.jsp">注册</a></label><label><a href="#">忘记密码？</a></label></li>
 	    </ul>
     </form>
     
